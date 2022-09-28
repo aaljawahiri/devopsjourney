@@ -31,3 +31,6 @@ override.tf.json
 
 # Exclude ansible.cfg
 ansible.cfg
+
+# Exclude .terraform.lock.hcl
+.terraform.lock.hcl
