@@ -1,0 +1,6 @@
+version: "2.2"
+
+services:
+  df_cleanup:
+    image: beardwin/df_cleanup:latest
+    build: .
