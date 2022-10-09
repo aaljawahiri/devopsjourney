@@ -2,4 +2,5 @@ version: "2.2"
 
 services:
   df_cleanup:
+    container_name: df-clean-up
     image: beardwin/df_cleanup:1.0

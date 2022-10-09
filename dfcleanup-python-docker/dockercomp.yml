@@ -10,27 +10,17 @@
         dest: /home/beardwin/docker-compose.yml
 
 
-    - name: Create docker container 
-      community.docker.docker_container:
-        name: df_cleanup
-        image: beardwin/df_cleanup:1.0
-      register: container_output
+    - name: run docker-compose up
+      community.docker.docker_compose:
+        project_src: /home/beardwin/
+        files:
+          - "docker-compose.yml"
+        state: present
+        recreate: always
+    
+    - name: get docker container logs
+      ansible.builtin.shell: docker logs df-clean-up
+      register: docker_container_logs
 
-
-    - name: debug
-      debug:
-        msg: "Docker said: {{ container_output }}" # Still an issue, working on printing out container output from python script.
-
-
-    # - name: run docker-compose up
-    #   community.docker.docker_compose:
-    #     project_src: /home/beardwin/
-    #     files:
-    #       - "docker-compose.yml"
-    #     detach: false
-    #     state: present
-    #   register: docker_container_output
-
-    # - name: debug
-    #   debug:
-    #     msg: "{{ docker_container_output.ansible_facts.docker_container.Output }}"
+    - debug:
+        msg: "{{ docker_container_logs.stdout }}"
