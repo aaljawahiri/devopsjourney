@@ -1,0 +1,20 @@
+---
+
+# run on all hosts defined in inventory file
+- hosts: all
+
+  become: true
+
+  tasks:
+    - name: Install pre-requisites
+      apt:
+        name: software-properties-common
+        state: present
+
+    - name: Add deadsnakes repo to sources list
+      apt_repository: repo="ppa:deadsnakes/ppa"
+
+    - name: Install python
+      apt: 
+        name: python3.8
+        state: present
